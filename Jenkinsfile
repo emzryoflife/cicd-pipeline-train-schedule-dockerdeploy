@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    def app = docker.build("willbla/train-schedule")
+                    def app = docker.build("bigeverest/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        def app = docker.image("willbla/train-schedule")
+                        def app = docker.image("bigeverest/train-schedule")
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
